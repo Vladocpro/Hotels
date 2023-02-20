@@ -18,7 +18,6 @@ import FAQ from "./scenes/faq";
 import Payments from "./scenes/payments";
 import FavouriteHotels from "./scenes/favouriteHotels";
 import Receipts from "./scenes/receipts";
-import Test from "./components/Test";
 import BarChart from "./scenes/barChart";
 
 
@@ -60,7 +59,6 @@ function App() {
                      <Route path="/register" element={<Registration/>}/>
                      <Route path="/profile" element={<Profile/>}/>
                      <Route path="/barchart" element={<BarChart/>}/>
-                     <Route path="/test" element={<Test/>}/>
                   </Routes>
                </main>
             </div>

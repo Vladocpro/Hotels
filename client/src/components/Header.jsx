@@ -20,14 +20,7 @@ const Header = ({ title, subtitle, buttonName, user, hotel }) => {
    const [anchorEl, setAnchorEl] = useState(null);
    const languageSelector= useSelector(state => state.isEnglish)
    const dispatch = useDispatch();
-   // const useStyles = makeStyles (theme => ({
-   //    popoverRoot: {
-   //       display: 'flex',
-   //       justifyContent: 'center',
-   //       alignItems: 'center',
-   //    },
-   // }));
-   // const classes = useStyles();
+
 
    const handleClick = (event) => {
       setAnchorEl(event.currentTarget);
