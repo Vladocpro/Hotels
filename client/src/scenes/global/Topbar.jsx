@@ -26,7 +26,11 @@ const Topbar = () => {
    const authData= useSelector(state => state.auth)
    const languageSelector= useSelector(state => state.isEnglish.bool)
    const navigateTo = () => {
-      navigate("/profile")
+      if(authData?.status == "loading") return
+      if(authData?.data == null && !isAuth) navigate("/login")
+      else {
+         navigate("/profile")
+      }
    }
    useEffect(() => {
       dispatch(fetchAuthMe())

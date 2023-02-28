@@ -34,8 +34,12 @@ const Profile = () => {
       else {
          dispatch(fetchProfileHotels(authData._id))
          dispatch(fetchProfilePayments({id :authData._id, short: true}))
+         setFirstName(authData.firstName)
+         setSecondName(authData.secondName)
+         setEmail(authData.email)
       }
    },[authData])
+
    useEffect(() => {
       if(languageSelector.bool) setFirstButtonLabel("Show all my payments"); else setFirstButtonLabel("Показати всі мої платежі");
       if(languageSelector.bool) setSecondButtonLabel("Show my favourite hotels"); else setSecondButtonLabel("Показати мої улюблені готелі");
@@ -45,19 +49,9 @@ const Profile = () => {
    };
    const handleClose = () => {
       setAnchorEl(null);
-      setFirstName("");
-      setSecondName("");
-      setEmail("");
       setPassword("");
    };
 
-   const popOver = () => {
-      return (
-          <Box>
-
-          </Box>
-      )
-   }
 
    const MyProfileInfo = ({ title, buttonTitle, data }) => {
       return (

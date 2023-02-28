@@ -18,6 +18,7 @@ const Login = () => {
    const isAuth = useSelector(selectIsAuth)
    const [theme, colorMode] = useMode();
    const colors = tokens(theme.palette.mode);
+   const languageSelector= useSelector(state => state.isEnglish)
 
    const dispatch = useDispatch();
    let navigate = useNavigate()
@@ -43,9 +44,10 @@ const Login = () => {
    return (
        <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", marginTop: "100px"}}>
           <Typography  variant="h5" className={styles.title}>
-             Log into account
+             {languageSelector.bool ? "Log into account" : "Увійти в обліковий запис"}
           </Typography>
           <form
+              style={{maxWidth: "500px"}}
               onSubmit={handleSubmit(onSubmit)}
           >
              <TextField
@@ -110,16 +112,16 @@ const Login = () => {
                  {...register('password', {required: 'Specify password'})}
 
              />
-             <Button disabled={!isValid} type="submit" size="large" variant="contained" fullWidth sx={{backgroundColor: "black"}}>
-                Log in
+             <Button disabled={!isValid} type="submit" size="large" variant="contained" fullWidth sx={{backgroundColor: "black", fontFamily: "Source Sans Pro,sans-serif", fontWeight: "500"}}>
+                {languageSelector.bool ? "Log in" : "Увійти"}
              </Button>
              <Button
                  size="large"
                  fullWidth
-                 sx={{marginTop: "20px", backgroundColor: "black", color: "white", textAlign: "center", alignSelf: "center", padding: "6px 0", cursor: "pointer", "&:hover": {color: "black", backgroundColor: "#F2F2F2"}}}
+                 sx={{marginTop: "20px", backgroundColor: "black", color: "white", textAlign: "center", alignSelf: "center", fontFamily: "Source Sans Pro,sans-serif", fontWeight: "500" , cursor: "pointer", "&:hover": {color: "black", backgroundColor: "#F2F2F2"}}}
                onClick={()=> navigate("/register")}
                >
-                Sign up
+                {languageSelector.bool ? "Sign up" : "Зареєструватися"}
              </Button>
           </form>
        </div>

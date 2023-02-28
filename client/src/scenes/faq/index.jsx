@@ -15,69 +15,44 @@ const FAQ = () => {
 
    return (
        <Box m="20px">
-          <Header title="FAQ" subtitle="Frequently Asked Questions Page" />
+          <Header title="FAQ" subtitle={languageSelector.bool ? "Frequently Asked Questions Page" : "Сторінка поширених запитань"} />
 
           <Accordion defaultExpanded>
              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                 <Typography color={colors.greenAccent[500]} variant="h5">
-                   How to see all payments by specific hotel ?
+                   {languageSelector.current.faqFirstQuestion}
                 </Typography>
              </AccordionSummary>
              <AccordionDetails>
                 <Typography>
-                   It's only available if you are an owner of that hotel. You can see all payments by going into favourites, and clicking the button with matching label.
+                   {languageSelector.current.faqFirstAnswer}
                 </Typography>
              </AccordionDetails>
           </Accordion>
           <Accordion defaultExpanded>
              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                 <Typography color={colors.greenAccent[500]} variant="h5">
-                   Why can't I remove the hotel from my favourites ?
+                   {languageSelector.current.faqSecondQuestion}
                 </Typography>
              </AccordionSummary>
              <AccordionDetails>
                 <Typography>
-                   If you are an owner, it's impossible due to system architecture.
+                   {languageSelector.current.faqSecondQuestion}
                 </Typography>
              </AccordionDetails>
           </Accordion>
           <Accordion defaultExpanded>
              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                 <Typography color={colors.greenAccent[500]} variant="h5">
-                   How can I edit info about my hotels?
+                   {languageSelector.current.faqThirdQuestion}
                 </Typography>
              </AccordionSummary>
              <AccordionDetails>
                 <Typography>
-                   Go to Favourite hotels.  Double click on the cell you want to edit, then press save button.
+                   {languageSelector.current.faqThirdQuestion}
                 </Typography>
              </AccordionDetails>
           </Accordion>
-          {/*<Accordion defaultExpanded>*/}
-          {/*   <AccordionSummary expandIcon={<ExpandMoreIcon />}>*/}
-          {/*      <Typography color={colors.greenAccent[500]} variant="h5">*/}
-          {/*         Tochno ?*/}
-          {/*      </Typography>*/}
-          {/*   </AccordionSummary>*/}
-          {/*   <AccordionDetails>*/}
-          {/*      <Typography>*/}
-          {/*         Da*/}
-          {/*      </Typography>*/}
-          {/*   </AccordionDetails>*/}
-          {/*</Accordion>*/}
-
-          {/*<Accordion defaultExpanded>*/}
-          {/*   <AccordionSummary expandIcon={<ExpandMoreIcon />}>*/}
-          {/*      <Typography color={colors.greenAccent[500]} variant="h5">*/}
-          {/*         Tochno Tochno ???*/}
-          {/*      </Typography>*/}
-          {/*   </AccordionSummary>*/}
-          {/*   <AccordionDetails>*/}
-          {/*      <Typography>*/}
-          {/*         Da*/}
-          {/*      </Typography>*/}
-          {/*   </AccordionDetails>*/}
-          {/*</Accordion>*/}
        </Box>
    );
 };

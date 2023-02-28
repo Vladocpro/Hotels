@@ -13,6 +13,7 @@ import TextField from "@mui/material/TextField";
 import {setLanguage} from "../../redux/slices/language";
 
 const Registration = () => {
+   const languageSelector= useSelector(state => state.isEnglish)
 
 
 
@@ -42,6 +43,7 @@ const Registration = () => {
 
    const handleChange = (SelectChangeEvent) => {
       setRole(SelectChangeEvent.target.value);
+      console.log(SelectChangeEvent.target.value)
    };
 
 
@@ -52,13 +54,13 @@ const Registration = () => {
              maxWidth: "500px"
           }}>
              <Typography  variant="h5" className={styles.title}>
-                Create account
+                {languageSelector.bool ? "Create account" : "Створити обліковий запис"}
              </Typography>
              <form
                  onSubmit={handleSubmit(onSubmit)}
              >
                 <TextField
-                    label="First Name"
+                    label={languageSelector.bool ? "First Name" : "Ім`я"}
                 //autoFocus
                     InputLabelProps={{
                        sx: {
@@ -92,7 +94,7 @@ const Registration = () => {
                     fullWidth
                 />
                 <TextField
-                    label="Second Name"
+                    label={languageSelector.bool ? "Second Name" : "Прізвище"}
                     sx={{
                        marginBottom: "20px !important",
                        '& .MuiOutlinedInput-root': {  // - The Input-root, inside the TextField-root
@@ -125,7 +127,7 @@ const Registration = () => {
                     fullWidth
                 />
                 <TextField
-                    label="E-Mail"
+                    label={languageSelector.bool ? "E-Mail" : "Електронна пошта"}
                     //autoFocus
                     sx={{
                        marginBottom: "20px !important",
@@ -184,7 +186,8 @@ const Registration = () => {
                           }
                        }
                     }}
-                    label="Password" fullWidth
+                    label={languageSelector.bool ? "Password" : "Пароль"}
+                    fullWidth
                     error={!!errors?.password}
                     type="password"
                     helperText={errors?.password ? errors.password?.message : null}
@@ -201,12 +204,12 @@ const Registration = () => {
                                   '&.Mui-focused ' : {
                                      color:'#6BBCC9'
                                   }
-                   }}>Role</InputLabel>
+                   }}>{languageSelector.bool ? "Role" : "Роль"}</InputLabel>
                    <Select
                        labelId="demo-simple-select-label"
                        id="demo-simple-select"
                        value={role}
-                       label="Role"
+                       label={languageSelector.bool ? "Role" : "Роль"}
                        onChange={handleChange}
                        sx={{
                           // '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
@@ -223,15 +226,14 @@ const Registration = () => {
                           }
                        }}
                    >
-                      <MenuItem value="Hotel Owner">Hotel Owner</MenuItem>
-                      <MenuItem value="Hotel Resident">Hotel Resident</MenuItem>
-                      {/*<MenuItem value={30}>Thirty</MenuItem>*/}
+                      <MenuItem value="Hotel Owner">{languageSelector.bool ? "Hotel Owner" : "Власник Готелю"}</MenuItem>
+                      <MenuItem value="Hotel Resident">{languageSelector.bool ? "Hotel Resident" : "Житель Готелю"}</MenuItem>
                    </Select>
                 </FormControl>
                 <Button
                     disabled={!isValid || role == ""}
                     type="submit" size="large" variant="contained" fullWidth sx={{backgroundColor: "black"}}>
-                   Sign up
+                   {languageSelector.bool ? "Sign up" : "Зареєструватись"}
                 </Button>
 
                 <Button
@@ -240,7 +242,7 @@ const Registration = () => {
                     sx={{marginTop: "20px", backgroundColor: "black", color: "white", textAlign: "center", alignSelf: "center", padding: "6px 0", cursor: "pointer", "&:hover": {color: "black", backgroundColor: "#F2F2F2"}}}
                     onClick={()=> navigate("/login")}
                 >
-                   Back to log in
+                   {languageSelector.bool ? "Back to log in" : "Повернутися до входу"}
                 </Button>
              </form>
           </div>
