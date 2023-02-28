@@ -10,5 +10,6 @@ const store = configureStore({
       isEnglish: languageReducer,
       hotels: hotelsReducer
    },
+   devTools: false
 })
 export default store;

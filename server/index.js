@@ -16,6 +16,7 @@ mongoose.connect(process.env.DB_CONNECTION_STRING)
     .then(() =>  console.log("DB OK"))
     .catch((err) => console.log("DB error", err));
 
+const PORT = process.env.PORT || 4444
 
 const app = express();
 app.use(express.json());
@@ -47,7 +48,6 @@ app.post('/hotels/:id/services/:serviceId/payments', checkAuth, handleValidation
 app.delete('/hotels/:id/payments/:paymentId',checkAuth, handleValidationErrors, PaymentController.removePayment);
 app.get('/userPayments/:id', PaymentController.getPaymentsByUser)
 
-// app.patch('/hotels/:id/services/:serviceId/payments/:paymentId',checkAuth,validations.hotelCreateServiceValidation, handleValidationErrors, PaymentController.updatePayment);
 
 
 app.get('/userHotels/:id', UserHotelsController.getUserHotels)
@@ -55,75 +55,10 @@ app.post('/userHotels', checkAuth,UserHotelsController.addHotel)
 app.delete('/userHotels', checkAuth,UserHotelsController.removeHotel)
 // app.post('/userHotels/:id/hotel/:hotelId', checkAuth,UserHotelsController.addHotel)
 
-app.listen(4444, (err) => {
+app.listen(PORT, (err) => {
     if(err) {
         return console.log(err)
     }
     console.log("Server OK")
 })
-
-// const calculateOrderAmount = (items) => {
-//     // Replace this constant with a calculation of the order's amount
-//     // Calculate the order total on the server to prevent
-//     // people from directly manipulating the amount on the client
-//     return 1400;
-// };
-//
-// app.post("/create-payment-intent", async (req, res) => {
-//     const { items } = req.body;
-//
-//     // Create a PaymentIntent with the order amount and currency
-//     const paymentIntent = await stripe.paymentIntents.create({
-//         amount: calculateOrderAmount(items),
-//         currency: "gbp",
-//         automatic_payment_methods: {
-//             enabled: true,
-//         },
-//     });
-//
-//     res.send({
-//         clientSecret: paymentIntent.client_secret,
-//     });
-// });
-//
-
-
-
-// app.post("/create-payment-intent", async (req, res) => {
-//     try {
-//         const paymentIntent = await stripe.paymentIntents.create({
-//             currency: "USD",
-//             amount: 1999,
-//             automatic_payment_methods: { enabled: true },
-//         });
-//
-//         // Send publishable key and PaymentIntent details to client
-//         res.send({
-//             clientSecret: paymentIntent.client_secret,
-//         });
-//     } catch (e) {
-//         return res.status(400).send({
-//             error: {
-//                 message: e.message,
-//             },
-//         });
-//     }
-// });
-
-// app.post('/create-checkout-session', async (req, res) => {
-//     const session = await stripe.checkout.sessions.create({
-//         line_items: [
-//             {
-//                 // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-//                 price: '{{PRICE_ID}}',
-//                 quantity: 1,
-//             },
-//         ],
-//         mode: 'payment',
-//         success_url: `${process.env.SERVER_URL}?success=true`,
-//         cancel_url: `${process.env.SERVER_URL}?canceled=true`,
-//     });
-//
-//     res.redirect(303, session.url);
-// });
 
