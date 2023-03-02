@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React,{useEffect,useState} from 'react';
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Paper from "@mui/material/Paper";
@@ -19,6 +19,7 @@ const Login = () => {
    const [theme, colorMode] = useMode();
    const colors = tokens(theme.palette.mode);
    const languageSelector= useSelector(state => state.isEnglish)
+   const [isDataFetched, setIsDataFetched] = useState(false)
 
    const dispatch = useDispatch();
    let navigate = useNavigate()
@@ -29,8 +30,13 @@ const Login = () => {
       },
       mode: 'onChange'
    })
+   const setWaitingForServerRes = () => {
+      setTimeout(() => setIsDataFetched(true),[4000])
+   }
    const onSubmit = async (values) => {
+      setWaitingForServerRes()
       const data = await dispatch(fetchAuth(values))
+      setIsDataFetched(false)
       if(!data.payload) {
          alert('Incorrect login or password');
          return;
@@ -124,6 +130,13 @@ const Login = () => {
                 {languageSelector.bool ? "Sign up" : "Зареєструватися"}
              </Button>
           </form>
+          {
+             isDataFetched &&
+              <div>
+                 <h3>Connecting to the server...</h3>
+                 <h3>Please wait around 10-15 seconds</h3>
+              </div>
+          }
        </div>
    );
 };

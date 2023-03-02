@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect,useState} from 'react';
 import Typography from "@mui/material/Typography";
 import styles from "./Registration.module.css";
 import {inputLabelClasses} from "@mui/material/InputLabel";
@@ -14,7 +14,7 @@ import {setLanguage} from "../../redux/slices/language";
 
 const Registration = () => {
    const languageSelector= useSelector(state => state.isEnglish)
-
+   const [isDataFetched, setIsDataFetched] = useState(false)
 
 
    const dispatch = useDispatch();
@@ -29,11 +29,23 @@ const Registration = () => {
       },
       mode: 'onChange'
    })
+
+   const setWaitingForServerRes = () => {
+      setTimeout(() => setIsDataFetched(true),[4000])
+   }
    const onSubmit = async (values) => {
       values = {...values, role}
+      setWaitingForServerRes()
       const data = await dispatch(fetchRegister(values))
-      if(data?.meta.requestStatus == "rejected"){alert('The email is already taken'); return; }
-      if(!data.payload) {alert('Unable to register account'); return; }
+      setIsDataFetched(false);
+      if(data?.meta.requestStatus == "rejected"){
+         alert('The email is already taken');
+         return;
+      }
+      if(!data.payload) {
+         alert('Unable to register account');
+         return;
+      }
       if('token' in data.payload) window.localStorage.setItem('token', data.payload.token)
       navigate("/")
    }
@@ -43,7 +55,6 @@ const Registration = () => {
 
    const handleChange = (SelectChangeEvent) => {
       setRole(SelectChangeEvent.target.value);
-      console.log(SelectChangeEvent.target.value)
    };
 
 
@@ -245,6 +256,13 @@ const Registration = () => {
                    {languageSelector.bool ? "Back to log in" : "Повернутися до входу"}
                 </Button>
              </form>
+             {
+                 isDataFetched &&
+                 <div>
+                    <h3>Connecting to the server...</h3>
+                    <h3>Please wait around 10-15 seconds</h3>
+                 </div>
+             }
           </div>
 
    );

@@ -20,7 +20,6 @@ const BarChart = () => {
       hotelsSelector.userHotels.data.forEach( item => {
          if (item.user._id == authData._id) hotels.push(item)
       });
-      console.log(hotels)
       let customizedData = [];
       hotels.forEach(item => {
          let object = {};
@@ -38,7 +37,6 @@ const BarChart = () => {
          customizedData.push(object)
       })
       setData(customizedData);
-      console.log(customizedData)
    }
    useEffect(() => {
       if(!authData) return;
@@ -51,7 +49,7 @@ const BarChart = () => {
 
    return (
        <Box m="20px">
-          <Header title={languageSelector.bool ? "Bar Chart" : "Гістограма"} subtitle={languageSelector ? "Income - Expenses Comparison" : "Прибуток - Витрати Порівняння"} />
+          <Header title={languageSelector.bool ? "Bar Chart" : "Гістограма"} subtitle={languageSelector.bool ? "Income - Expenses Comparison" : "Прибуток - Витрати Порівняння"} />
           <Box height="75vh">
              <ResponsiveBar
                  data={data}
